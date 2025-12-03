@@ -7,6 +7,8 @@ A clipboard monitoring utility with keyboard shortcut navigation for clipboard h
 - **Clipboard History**: Automatically captures text copied to the clipboard (Ctrl+C)
 - **Quick Navigation**: Use Win+Shift keyboard shortcut to cycle through clipboard history
 - **Native Event Monitoring**: Uses JNativeHook for system-wide keyboard event monitoring
+- **Modern UI**: Clean, contemporary interface with FlatLaf Look and Feel
+- **Smart History**: Prevents duplicate consecutive entries and limits history to 100 items
 - **Modern Architecture**: Built with Java 11+ and modern logging framework (SLF4J + Logback)
 - **Lightweight**: Runs in the background with minimal resource usage
 
@@ -84,6 +86,7 @@ The application uses the following libraries:
 - **JNativeHook 2.2.2**: For native keyboard and mouse event monitoring
 - **SLF4J 2.0.9**: Logging facade API
 - **Logback 1.4.11**: Logging implementation
+- **FlatLaf 3.2.5**: Modern Look and Feel library for a contemporary UI
 
 All dependencies are managed through Maven and will be automatically downloaded during the build process.
 
@@ -170,13 +173,17 @@ The project follows modern Java best practices:
 - Java 11+ features and syntax
 - Proper exception handling with logging
 - Separation of concerns (UI, business logic, event handling)
+- Modern UI design with FlatLaf Look and Feel
+- Thread-safe UI updates using SwingUtilities
 - Comprehensive documentation
+- Defensive programming with null checks and bounds validation
 
 ## Performance Notes
 
-- The application maintains clipboard history in memory
-- Memory usage grows with the number of clipboard items captured
-- Consider restarting the application periodically for very long-running sessions
+- The application maintains clipboard history in memory (limited to 100 items)
+- Automatically prevents duplicate consecutive clipboard entries
+- Memory usage is bounded by the maximum history size
+- Lightweight background operation with minimal CPU usage
 - Only text clipboard content is captured (images and other formats are ignored)
 
 ## Known Limitations
@@ -201,5 +208,10 @@ Keyur Golani
   - Added SLF4J + Logback logging
   - Refactored code for better organization
   - Updated JNativeHook to latest version (2.2.2)
+  - Modernized UI with FlatLaf Look and Feel
+  - Enhanced user experience with improved layout and design
+  - Improved clipboard management with smart duplicate prevention
+  - Added history size limit (100 items) for better memory management
+  - Better error handling and thread safety
   
 - **1.0.0**: Initial release

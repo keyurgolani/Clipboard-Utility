@@ -74,6 +74,13 @@ public class KeyboardEventHandler implements NativeKeyListener {
                 if (isWindowKeyHeld) {
                     handleWindowKeyRelease();
                 }
+                isWindowKeyHeld = false;
+                break;
+                
+            case NativeKeyEvent.VC_CONTROL:
+            case NativeKeyEvent.VC_CONTROL_L:
+            case NativeKeyEvent.VC_CONTROL_R:
+                isCtrlKeyHeld = false;
                 break;
                 
             case NativeKeyEvent.VC_SHIFT:
@@ -148,7 +155,13 @@ public class KeyboardEventHandler implements NativeKeyListener {
      * Captures current clipboard content to history.
      */
     private void handleCtrlC() {
+        // Small delay to allow clipboard to be populated by the system
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            logger.warn("Sleep interrupted while waiting for clipboard", e);
+        }
         clipboardManager.captureClipboard();
-        isCtrlKeyHeld = false;
     }
 }
